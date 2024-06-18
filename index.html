@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Registros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilização para a tabela */
+        table {
+            width: 100%;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+        
+        .mes-atual {
+            font-size: 1.3em;
+            font-weight: bolder;
+        }
+
+        .mes-anterior {
+            color: black;
+            font-size: 1.0em;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Parcela</th>
+                <th>Data de vencimento</th>
+                <th>Total a liquidar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados dinâmicos -->
+            <script>
+                const registros = [
+                    { parcela: 1, dataVencimento: '10/03/19', valor: 947.10 },
+                    { parcela: 2, dataVencimento: '10/04/19', valor: 943.05 },
+                    { parcela: 3, dataVencimento: '10/05/19', valor: 938.39 },
+                    { parcela: 4, dataVencimento: '10/06/19', valor: 934.17 },
+                    { parcela: 5, dataVencimento: '10/07/19', valor: 929.75 },
+                    { parcela: 6, dataVencimento: '10/08/19', valor: 925.87 },
+                    { parcela: 7, dataVencimento: '10/09/19', valor: 921.27 },
+                    { parcela: 8, dataVencimento: '10/10/19', valor: 916.59 },
+                    { parcela: 9, dataVencimento: '10/11/19', valor: 911.80 },
+                    { parcela: 10, dataVencimento: '10/12/19', valor: 906.27 },
+                    { parcela: 11, dataVencimento: '10/01/20', valor: 900.74 },
+                    { parcela: 12, dataVencimento: '10/02/20', valor: 900.12 },
+                    { parcela: 13, dataVencimento: '10/03/20', valor: 888.97 },
+                    { parcela: 14, dataVencimento: '10/04/20', valor: 883.42 },
+                    { parcela: 15, dataVencimento: '10/05/20', valor: 876.85 },
+                    { parcela: 16, dataVencimento: '10/06/20', valor: 870.63 },
+                    { parcela: 17, dataVencimento: '10/07/20', valor: 863.65 },
+                    { parcela: 18, dataVencimento: '10/08/20', valor: 856.85 },
+                    { parcela: 19, dataVencimento: '10/09/20', valor: 849.98 },
+                    { parcela: 20, dataVencimento: '10/10/20', valor: 843.07 },
+                    { parcela: 21, dataVencimento: '10/11/20', valor: 836.02 },
+                    { parcela: 22, dataVencimento: '10/12/20', valor: 829.12 },
+                    { parcela: 23, dataVencimento: '10/01/21', valor: 829.59 },
+                    { parcela: 24, dataVencimento: '10/02/21', valor: 815.79 },
+                    { parcela: 25, dataVencimento: '10/03/21', valor: 808.51 },
+                    { parcela: 26, dataVencimento: '10/04/21', valor: 802.40 },
+                    { parcela: 27, dataVencimento: '10/05/21', valor: 796.20 },
+                    { parcela: 28, dataVencimento: '10/06/21', valor: 790.75 },
+                    { parcela: 29, dataVencimento: '10/07/21', valor: 785.65 },
+                    { parcela: 30, dataVencimento: '10/08/21', valor: 780.78 },
+                    { parcela: 31, dataVencimento: '10/09/21', valor: 776.71 },
+                    { parcela: 32, dataVencimento: '10/10/21', valor: 776.04 },
+                    { parcela: 33, dataVencimento: '10/11/21', valor: 770.13 },
+                    { parcela: 34, dataVencimento: '10/12/21', valor: 766.29 },
+                    { parcela: 35, dataVencimento: '10/01/22', valor: 764.37 },
+                    { parcela: 36, dataVencimento: '10/02/22', valor: 763.32 },
+                    { parcela: 37, dataVencimento: '10/03/22', valor: 760.98 },
+                    { parcela: 38, dataVencimento: '10/04/22', valor: 760.80 },
+                    { parcela: 39, dataVencimento: '10/05/22', valor: 764.18 },
+                    { parcela: 40, dataVencimento: '10/06/22', valor: 760.61 },
+                    { parcela: 41, dataVencimento: '10/07/22', valor: 760.49 },
+                    { parcela: 42, dataVencimento: '10/08/22', valor: 762.89 },
+                    { parcela: 43, dataVencimento: '10/09/22', valor: 772.35 },
+                    { parcela: 44, dataVencimento: '10/10/22', valor: 763.35 },
+                    { parcela: 45, dataVencimento: '10/11/22', valor: 763.35 },
+                    { parcela: 46, dataVencimento: '10/12/22', valor: 763.92 },
+                    { parcela: 47, dataVencimento: '10/01/23', valor: 764.68 },
+                    { parcela: 48, dataVencimento: '10/02/23', valor: 766.09 },
+                    { parcela: 49, dataVencimento: '10/03/23', valor: 765.34 },
+                    { parcela: 50, dataVencimento: '10/04/23', valor: 766.50 },
+                    { parcela: 51, dataVencimento: '10/05/23', valor: 765.96 },
+                    { parcela: 52, dataVencimento: '10/06/23', valor: 767.03 },
+                    { parcela: 53, dataVencimento: '10/07/23', valor: 767.24 },
+                    { parcela: 54, dataVencimento: '10/08/23', valor: 768.64 },
+                    { parcela: 55, dataVencimento: '10/09/23', valor: 769.23 },
+                    { parcela: 56, dataVencimento: '10/10/23', valor: 769.43 },
+                    { parcela: 57, dataVencimento: '10/11/23', valor: 769.51 },
+                    { parcela: 58, dataVencimento: '10/12/23', valor: 789.95 },
+                    { parcela: 59, dataVencimento: '10/01/24', valor: 784.87 },
+                    { parcela: 60, dataVencimento: '10/02/24', valor: 768.56 },
+                    { parcela: 61, dataVencimento: '10/03/24', valor: 803.58 },
+                    { parcela: 62, dataVencimento: '10/04/24', valor: 783.78 },
+                    { parcela: 63, dataVencimento: '10/05/24', valor: 764.42 },
+                    { parcela: 64, dataVencimento: '10/06/24', valor: 752.51 },
+                    { parcela: 65, dataVencimento: '10/07/24', valor: 740.71 },
+                    { parcela: 66, dataVencimento: '10/08/24', valor: 729.18 },
+                    { parcela: 67, dataVencimento: '10/09/24', valor: 717.82 },
+                    { parcela: 68, dataVencimento: '10/10/24', valor: 706.72 },
+                    { parcela: 69, dataVencimento: '10/11/24', valor: 695.66 },
+                    { parcela: 70, dataVencimento: '10/12/24', valor: 684.87 },
+                    { parcela: 71, dataVencimento: '10/01/25', valor: 674.30 },
+                    { parcela: 72, dataVencimento: '10/02/25', valor: 663.73 },
+                    { parcela: 73, dataVencimento: '10/03/25', valor: 653.45 },
+                    { parcela: 74, dataVencimento: '10/04/25', valor: 643.34 },
+                    { parcela: 75, dataVencimento: '10/05/25', valor: 633.30 },
+                    { parcela: 76, dataVencimento: '10/06/25', valor: 623.37 },
+                    { parcela: 77, dataVencimento: '10/07/25', valor: 613.66 },
+                    { parcela: 78, dataVencimento: '10/08/25', valor: 604.09 },
+                    { parcela: 79, dataVencimento: '10/09/25', valor: 594.73 },
+                    { parcela: 80, dataVencimento: '10/10/25', valor: 585.48 },
+                    { parcela: 81, dataVencimento: '10/11/25', valor: 576.37 },
+                    { parcela: 82, dataVencimento: '10/12/25', valor: 567.41 },
+                    { parcela: 83, dataVencimento: '10/01/26', valor: 558.65 },
+                    { parcela: 84, dataVencimento: '10/02/26', valor: 549.93 },
+                    { parcela: 85, dataVencimento: '10/03/26', valor: 541.39 },
+                    { parcela: 86, dataVencimento: '10/04/26', valor: 533.04 },
+                    { parcela: 87, dataVencimento: '10/05/26', valor: 524.67 },
+                    { parcela: 88, dataVencimento: '10/06/26', valor: 516.53 },
+                    { parcela: 89, dataVencimento: '10/07/26', valor: 508.46 },
+                    { parcela: 90, dataVencimento: '10/08/26', valor: 500.52 },
+                    { parcela: 91, dataVencimento: '10/09/26', valor: 492.83 },
+                    { parcela: 92, dataVencimento: '10/10/26', valor: 485.18 },
+                    { parcela: 93, dataVencimento: '10/11/26', valor: 477.54 },
+                    { parcela: 94, dataVencimento: '10/12/26', valor: 470.21 },
+                    { parcela: 95, dataVencimento: '10/01/27', valor: 462.84 },
+                    { parcela: 96, dataVencimento: '10/02/27', valor: 456.75 }
+                ];
+
+                const hoje = new Date();
+                const diaCorrente = hoje.getDate();
+                const mesCorrente = hoje.getMonth() + 1; // Lembre-se de que os meses são zero-based (janeiro = 0)
+                const anoCorrente = hoje.getFullYear();
+                const dataReferencia = new Date(anoCorrente, mesCorrente - 2, 10);
+
+                const registrosFiltrados = registros.filter((registro) => {
+                    const [dia, mes, ano] = registro.dataVencimento.split('/');
+                    const mesVencimento = parseInt(mes, 10);
+                    const anoVencimento = parseInt("20" + ano, 10);
+                    const dataRegistro = new Date(anoVencimento, mesVencimento - 1, dia);
+
+                    return dataRegistro >= dataReferencia;
+                });
+
+
+                registrosFiltrados.forEach((registro, index) => {
+                    const { parcela, dataVencimento, valor } = registro;
+                    const linha = document.createElement('tr');
+
+                    linha.innerHTML = `
+                                        <td>${parcela}&#0176;</td>
+                                        <td>${dataVencimento}</td>
+                                        <td>${valor.toFixed(2)}</td>
+                                    `;
+
+                    if (index === 0) {
+                        linha.classList.add('mes-anterior', 'alert', 'alert-success');
+                    } else if (index === 1) {
+                        linha.classList.add('mes-atual', 'alert', 'alert-danger');
+                    } else if (index === 2) {
+                        linha.classList.add('mes-anterior', 'alert', 'alert-warning');
+                    } else {
+                        linha.classList.add('mes-anterior');
+                    }
+
+                    document.querySelector('tbody').appendChild(linha);
+                });
+
+            </script>
+        </tbody>
+    </table>
+</body>
+
+</html>
